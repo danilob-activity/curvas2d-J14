@@ -1,0 +1,60 @@
+.playable-buttons {
+    padding-bottom: 5px;
+    padding-left: 26px;
+    padding-right: 10px;
+    padding-top: 5px;
+    text-align: right;
+    width: 563.4px;
+}
+
+.playable-canvas {
+    border-bottom-color: rgb(77, 78, 83);
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-image-outset: 0;
+    border-image-repeat: stretch stretch;
+    border-image-slice: 100%;
+    border-image-source: none;
+    border-image-width: 1;
+    border-left-color: rgb(77, 78, 83);
+    border-left-style: solid;
+    border-left-width: 1px;
+    border-right-color: rgb(77, 78, 83);
+    border-right-style: solid;
+    border-right-width: 1px;
+    border-top-color: rgb(77, 78, 83);
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+    border-top-style: solid;
+    border-top-width: 1px;
+}
+
+.playable-code {
+    background-color: rgb(244, 247, 248);
+    border-bottom-color: rgb(77, 78, 83);
+    border-bottom-style: none;
+    border-bottom-width: 0px;
+    border-image-outset: 0;
+    border-image-repeat: stretch stretch;
+    border-image-slice: 100%;
+    border-image-source: none;
+    border-image-width: 1;
+    border-left-color: rgb(85, 138, 187);
+    border-left-style: solid;
+    border-left-width: 6px;
+    border-right-color: rgb(77, 78, 83);
+    border-right-style: none;
+    border-right-width: 0px;
+    border-top-color: rgb(77, 78, 83);
+    border-top-style: none;
+    border-top-width: 0px;
+    color: rgb(77, 78, 83);
+    height: 100px;
+    padding-bottom: 0px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+    width: 563.4px;
+}

@@ -1,0 +1,46 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Curvas</title>
+    <link href="layout.css" rel="stylesheet">
+    <script src="mathfunctions.js"></script>
+    <script src="arclength.js"></script>
+
+    <style>
+        article {
+            max-width: 900px;
+            margin: auto;
+        }
+        
+        .playable-buttons {
+            margin-left: auto;
+        }
+        
+        .playable-code {
+            width: 900px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Learn about this code on MDN: https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/scale -->
+    <article>
+        <canvas id="canvas" width="900" height="480" class="playable-canvas"></canvas>
+        <div class="playable-buttons">
+            <input id="save" type="button" value="Save" />
+        </div>
+        <textarea id="code" class="playable-code">
+p0 = [-250,-100]; 
+p1 = [250,140]; 
+p2 = [-1200,+150]; 
+p3 = [-300,-525]; 
+setHermite(p0,p1,p2,p3);
+  </textarea>
+
+        <script src="gl-matrix.js"></script>
+        <script src="script.js"></script>
+    </article>
+</body>
+
+</html>
