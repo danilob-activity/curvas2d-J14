@@ -11,12 +11,10 @@ var points_curveH = [] //armazena os pontos da curva de hermite
 var points_curveB = []
 var np = 30;
 var fps = 60;
-var frame_current = 0;
 var frame_current_hermite = 0;
 var frame_current_bezier = 0;
 var total_time_hermite = 3;
-var total_time_bezier = 3;
-var total_time = 3;
+var total_time_bezier = 1;
 var p_current;
 
 function drawCanvas() {
