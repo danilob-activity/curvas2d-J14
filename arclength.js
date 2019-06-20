@@ -285,21 +285,21 @@ ArcLength.prototype.getU = function(indice,s)
 
 }
 
-function exampleOfUse(){
-    console.log("Example of use ArcLength");
-    var p0 = new Vec2(0,0);
-    var p1 = new Vec2(10,0);
-    var p2 = new Vec2(10,10);
-    var p3 = new Vec2(0,0);
+function createArc(p0l, p1l, p2l, p3l){
+    var p0 = new Vec2(p0l[0],p0l[1]);
+    var p1 = new Vec2(p1l[0],p1l[1]);
+    var p2 = new Vec2(p2l[0],p2l[1]);
+    var p3 = new Vec2(p3l[0],p3l[1]);
     var curve = new CurveBezier(p0,p1,p2,p3);
     var arc = new ArcLength();
     arc.adaptive_integration(curve,0.0,1.0,0.0000001); //calculates the total arc length and save the table
-    console.log("ArcLength:"+arc.length);
-    var x = arc.length/2.0;
-    var u = arc.getValueU(x); //returns the value of u given a length x;
-    console.log("Parameter u="+u+", gives arc length = "+x);
-    pu = arc.getVec4S(curve,x); //returns the point 2D given a length x;
-    console.log("Parameter u="+u+", point: ("+pu.x+", "+pu.y+")");
-    console.log("Example of use ArcLength End ***");
+    return [arc, curve];
+    // console.log("ArcLength:"+arc.length);
+    // var x = arc.length/2.0;
+    // var u = arc.getValueU(x); //returns the value of u given a length x;
+    // console.log("Parameter u="+u+", gives arc length = "+x);
+    // pu = arc.getVec4S(curve,x); //returns the point 2D given a length x;
+    // console.log("Parameter u="+u+", point: ("+pu.x+", "+pu.y+")");
+    // console.log("Example of use ArcLength End ***");
 }
 

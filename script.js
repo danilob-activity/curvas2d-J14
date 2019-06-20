@@ -10,11 +10,27 @@ var scale = 1;
 var points_curveH = [] //armazena os pontos da curva de hermite
 var points_curveB = []
 var np = 30;
+var fps = 60;
+var frame_current = 0;
+var total_time = 3;
+var p_current;
 
 function drawCanvas() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.setTransform(1, 0, 0, 1, 0, 0);
-    eval(textarea.value);
+    setTimeout(function() {
+        requestAnimationFrame(drawCanvas);
+        frame_current += 1;
+        frame_current = frame_current % (total_time * fps);
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.setTransform(1, 0, 0, 1, 0, 0);
+        eval(textarea.value);
+
+
+
+        // call the draw function again!
+        //requestAnimationFrame(draw);
+
+
+    }, 1000 / fps);
 }
 
 function drawCircle(M, canv, color) { //desenha um círculo
@@ -98,6 +114,9 @@ function setHermite(p0, p1, p0l, p1l) {
     drawCircle(mult(M, translate(p0[0], p0[1])), ctx, "#8b104e");
     drawCircle(mult(M, translate(p1[0], p1[1])), ctx, "#8b104e");
 
+    p_current = calculatePointCurveHermite(p0, p1, p0l, p1l, frame_current / (total_time * fps));
+    drawCircle(mult(M, translate(p_current[0][0], p_current[0][1])), ctx, "#52437b");
+
 }
 
 function setBezier(p0, p1, p2, p3) {
@@ -105,7 +124,7 @@ function setBezier(p0, p1, p2, p3) {
     ctx.beginPath();
     M = transformCanvas(canvas.width, canvas.height);
     ctx.font = "14px Arial";
-    pos0 = multVec(mult(M, translate(p0[0], p1[0])), [0, 0, 1]);
+    pos0 = multVec(mult(M, translate(p0[0], p0[1])), [0, 0, 1]);
     pos1 = multVec(mult(M, translate(p1[0], p1[1])), [0, 0, 1]);
     pos2 = multVec(mult(M, translate(p2[0], p2[1])), [0, 0, 1]);
     pos3 = multVec(mult(M, translate(p3[0], p3[1])), [0, 0, 1]);
@@ -115,7 +134,7 @@ function setBezier(p0, p1, p2, p3) {
     ctx.fillStyle = "#ff8364";
     ctx.strokeStyle = "#ff8364";
     drawArrow(ctx, pos0[0], pos0[1], pos2[0], pos2[1]);
-    drawArrow(ctx, pos1[0], pos1[1], pos3[0], pos3[1]);
+    drawArrow(ctx, pos3[0], pos3[1], pos1[0], pos1[1]);
     ctx.fillText("p0", pos0[0] + 7, pos0[1] - 7);
     ctx.fillText("p1", pos1[0] + 7, pos1[1] - 7);
     ctx.fillText("p2", pos2[0] + 7, pos2[1] - 7);
@@ -124,6 +143,13 @@ function setBezier(p0, p1, p2, p3) {
     drawCircle(mult(M, translate(p1[0], p1[1])), ctx, "#8b104e");
     drawCircle(mult(M, translate(p2[0], p2[1])), ctx, "#8b104e");
     drawCircle(mult(M, translate(p3[0], p3[1])), ctx, "#8b104e");
+
+    var arc = createArc(p0, p1, p2, p3);
+    var total_length = arc[0].length;
+    var length_current = total_length * (frame_current / (total_time * fps));
+    p_current = arc[0].getVec4S(arc[1], length_current)
+
+    drawCircle(mult(M, translate(p_current.x, p_current.y)), ctx, "#52437b");
 }
 
 function drawCurveHermite() {
