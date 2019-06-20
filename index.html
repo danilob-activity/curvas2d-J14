@@ -29,6 +29,8 @@
         <canvas id="canvas" width="900" height="480" class="playable-canvas"></canvas>
         <div class="playable-buttons">
             <input id="save" type="button" value="Save" />
+            Hermite: <input id="hermite" type="range" name="points" step='1' min="1" max="10" oninput="setTimeHermite(this.value)">
+            Bezier: <input id="bezier" type="range" name="points" step='1' min="1" max="10" oninput="setTimeBezier(this.value)">
         </div>
         <textarea id="code" class="playable-code">
 p0 = [-150,-100]; 

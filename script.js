@@ -12,14 +12,22 @@ var points_curveB = []
 var np = 30;
 var fps = 60;
 var frame_current = 0;
+var frame_current_hermite = 0;
+var frame_current_bezier = 0;
+var total_time_hermite = 3;
+var total_time_bezier = 3;
 var total_time = 3;
 var p_current;
 
 function drawCanvas() {
     setTimeout(function() {
         requestAnimationFrame(drawCanvas);
-        frame_current += 1;
-        frame_current = frame_current % (total_time * fps);
+        // frame_current += 1;
+        // frame_current = frame_current % (total_time * fps);
+        frame_current_hermite += 1;
+        frame_current_hermite = frame_current_hermite % (total_time_hermite * fps);
+        frame_current_bezier += 1;
+        frame_current_bezier = frame_current_bezier % (total_time_bezier * fps);
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.setTransform(1, 0, 0, 1, 0, 0);
         eval(textarea.value);
@@ -27,7 +35,7 @@ function drawCanvas() {
 
 
         // call the draw function again!
-        //requestAnimationFrame(draw);
+        // requestAnimationFrame(drawCanvas);
 
 
     }, 1000 / fps);
@@ -114,7 +122,7 @@ function setHermite(p0, p1, p0l, p1l) {
     drawCircle(mult(M, translate(p0[0], p0[1])), ctx, "#8b104e");
     drawCircle(mult(M, translate(p1[0], p1[1])), ctx, "#8b104e");
 
-    p_current = calculatePointCurveHermite(p0, p1, p0l, p1l, frame_current / (total_time * fps));
+    p_current = calculatePointCurveHermite(p0, p1, p0l, p1l, frame_current_hermite / (total_time_hermite * fps));
     drawCircle(mult(M, translate(p_current[0][0], p_current[0][1])), ctx, "#52437b");
 
 }
@@ -146,7 +154,7 @@ function setBezier(p0, p1, p2, p3) {
 
     var arc = createArc(p0, p1, p2, p3);
     var total_length = arc[0].length;
-    var length_current = total_length * (frame_current / (total_time * fps));
+    var length_current = total_length * (frame_current_bezier / (total_time_bezier * fps));
     p_current = arc[0].getVec4S(arc[1], length_current)
 
     drawCircle(mult(M, translate(p_current.x, p_current.y)), ctx, "#52437b");
@@ -251,6 +259,13 @@ save.addEventListener("click", function() {
     window.location.href = fullQuality;
 });
 
+function setTimeHermite(value) {
+    total_time_hermite = value;
+}
+
+function setTimeBezier(value) {
+    total_time_bezier = value;
+}
 
 
 textarea.addEventListener("input", drawCanvas);
